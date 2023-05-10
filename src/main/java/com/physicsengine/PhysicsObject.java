@@ -3,12 +3,14 @@ package com.physicsengine;
 public class PhysicsObject {
     private double x, y; // position
     private double vx, vy; // velocity
+    private double mass;
 
-    public PhysicsObject(double x, double y, double vx, double vy) {
+    public PhysicsObject(double x, double y, double vx, double vy, double mass) {
         this.x = x;
         this.y = y;
         this.vx = vx;
         this.vy = vy;
+        this.mass = mass;
     }
 
     public double getX() {
@@ -37,6 +39,10 @@ public class PhysicsObject {
 
     public void setVx(double d) {
         this.vx = d;
+    }
+
+    public double getMass() {
+        return mass;
     }
 
 }

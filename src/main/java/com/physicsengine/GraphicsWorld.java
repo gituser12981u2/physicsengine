@@ -2,6 +2,8 @@ package com.physicsengine;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
@@ -10,11 +12,17 @@ public class GraphicsWorld {
     private static final double windowHeight = 600.0;
 
     private Rectangle blockGraphic;
+    private Circle circleGraphic;
     private Line ground;
     private Label positionLabel;
 
     public GraphicsWorld(PhysicsObject block) {
         blockGraphic = new Rectangle(block.getX() * scale, windowHeight - block.getY() * scale - scale, scale, scale);
+        circleGraphic = new Circle(scale);
+        circleGraphic.setFill(Color.RED);
+        circleGraphic.setCenterX(200);
+        circleGraphic.setCenterY(200);
+
         ground = new Line(0, windowHeight, 800, windowHeight);
 
         positionLabel = new Label();
@@ -22,11 +30,15 @@ public class GraphicsWorld {
         positionLabel.setLayoutY(block.getY() * scale - scale);
 
         GridOverlay grid = new GridOverlay(windowHeight, scale);
-        Pane root = new Pane(grid.getGrid(), blockGraphic, ground, positionLabel);
+        new Pane(grid.getGrid(), blockGraphic, circleGraphic, ground, positionLabel);
     }
 
     public Rectangle getBlockGraphic() {
         return blockGraphic;
+    }
+
+    public Circle getCircleGraphic() {
+        return circleGraphic;
     }
 
     public Line getGround() {
@@ -44,7 +56,7 @@ public class GraphicsWorld {
     }
 
     public Pane getPane() {
-        Pane root = new Pane(blockGraphic, ground, positionLabel);
+        Pane root = new Pane(blockGraphic, circleGraphic, ground, positionLabel);
         return root;
     }
 }
